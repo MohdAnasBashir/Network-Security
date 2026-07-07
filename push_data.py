@@ -48,6 +48,7 @@ class NetworkDataExtract:
 
             self.collection=self.database[self.collection]
 
+
             self.collection.insert_many(self.records)
 
             return (len(self.records))
@@ -64,7 +65,6 @@ if __name__=="__main__":
     networkobj=NetworkDataExtract()
     records=networkobj.convertercv_to_json(filepath=File_path)
     no_of_records=networkobj.insert_data_mongodb(DATABASE,Collection,records)
-    print(no_of_records)
 
     # data = pd.read_csv(File_path)
     # print(data.head())
