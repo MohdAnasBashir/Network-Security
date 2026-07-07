@@ -17,7 +17,6 @@ MONGO_DB_URL=os.getenv("MONGO_DB_URL")
 ##start reading from this
 
 
-
 ##step 1 creating components
 class DataIngestion:
     def __init__(self,data_ingestion_config:DataIngestionConfig):
@@ -25,7 +24,6 @@ class DataIngestion:
             self.data_ingestion_config=data_ingestion_config
         except Exception as e:
             raise NetworkSecurityException(e,sys)
-        
 
     
     #export data from mongo db as dataframe
