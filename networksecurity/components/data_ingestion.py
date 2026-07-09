@@ -67,7 +67,7 @@ class DataIngestion:
     #store them into their respective directories
     def split_data_as_train_test(self,dataframe:pd.DataFrame):
         try:
-            train_set,test_set=train_test_split(dataframe,test_size=self.data_ingestion_config.train_test_split_ratio)
+            train_set,test_set=train_test_split(dataframe,test_size=self.data_ingestion_config.train_test_split_ratio,random_state=42)
             logging.info("Performed train test split on the data frame")
 
             logging.info("Exited split_data_as_train_test_method of dat ingestion class")
