@@ -48,9 +48,6 @@ class DataValidation:
                 return False
         except Exception as e:
             raise NetworkSecurityException(e,sys)
-
-
-
     def detect_dataset_drift(self,base_df,current_df,threshold=0.05)->bool:
         try:
             status=True
@@ -115,7 +112,7 @@ class DataValidation:
             
             ##lets check data drift
             status=self.detect_dataset_drift(base_df=train_dataframe,current_df=test_dataframe)
-            ##craete valid train path directory
+            ##craete valid train path directory is true 
             if status:
                 os.makedirs(
                     os.path.dirname(self.data_validation_config.valid_train_file_path),
