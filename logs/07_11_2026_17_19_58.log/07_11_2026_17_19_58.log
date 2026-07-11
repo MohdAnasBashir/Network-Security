@@ -1,0 +1,21 @@
+[ 2026-07-11 17:20:01,691 ] 14 root - INFO - Initiate data ingestion
+[ 2026-07-11 17:20:31,482 ] 71 root - INFO - Performed train test split on the data frame
+[ 2026-07-11 17:20:31,482 ] 73 root - INFO - Exited split_data_as_train_test_method of dat ingestion class
+[ 2026-07-11 17:20:31,483 ] 79 root - INFO - exporting train and test file path
+[ 2026-07-11 17:20:31,844 ] 86 root - INFO - Exported train and test file path
+[ 2026-07-11 17:20:31,844 ] 18 root - INFO - data Initiation completed
+[ 2026-07-11 17:20:31,847 ] 23 root - INFO - initiated te edata validation
+[ 2026-07-11 17:20:31,937 ] 42 root - INFO - required no of columns31
+[ 2026-07-11 17:20:31,937 ] 43 root - INFO - data frame has columns:31
+[ 2026-07-11 17:20:31,937 ] 42 root - INFO - required no of columns31
+[ 2026-07-11 17:20:31,937 ] 43 root - INFO - data frame has columns:31
+[ 2026-07-11 17:20:32,454 ] 25 root - INFO - data validation completed
+[ 2026-07-11 17:20:32,454 ] 55 root - INFO - enetered initiate data tarsnformation of data transformation class
+[ 2026-07-11 17:20:32,454 ] 60 root - INFO - Starting Data Transformation
+[ 2026-07-11 17:20:32,536 ] 41 root - INFO - enetered get data trandformer object method
+[ 2026-07-11 17:20:32,536 ] 47 root - INFO - Initialise knnimputer with {'missing_values': nan, 'n_neighbors': 3, 'weights': 'uniform'}
+[ 2026-07-11 17:20:32,590 ] 48 root - INFO - Entered the save_object method of mainutilsclass
+[ 2026-07-11 17:20:32,602 ] 52 root - INFO - Exited the save objecy methods of main utils class
+[ 2026-07-11 17:21:16,810 ] 48 root - INFO - Entered the save_object method of mainutilsclass
+[ 2026-07-11 17:21:16,827 ] 52 root - INFO - Exited the save objecy methods of main utils class
+[ 2026-07-11 17:21:16,827 ] 137 root - INFO - Model Triner Artifact: ModelTrainerArtifact(trained_model_file_path='Artifacts/07_11_2026_17_19_58/model_trainer/trained_model/model.pkl', train_metric_artifact=ClassificationMetricArtiFact(f1_score=0.9909648927334238, precision_score=0.9883220527325992, recall_score=0.9936219048973208), test_metric_artifact=ClassificationMetricArtiFact(f1_score=0.9899814171447039, precision_score=0.9869512686266613, recall_score=0.9930302293540806))

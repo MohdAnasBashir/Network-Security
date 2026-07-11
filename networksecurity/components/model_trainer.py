@@ -1,6 +1,7 @@
 import os
 import sys
 import pymongo
+import mlflow
 import numpy as np
 import pandas as pd
 from typing import List
@@ -36,6 +37,23 @@ class ModelTrainer:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
     
+
+
+    def track_mlflow(self, bestmodel, classificationmetric):
+        mlflow.set_tracking_uri("sqlite:///mlflow.db")
+        mlflow.set_experiment("Network Security")
+        with mlflow.start_run():
+
+            f1_score = classificationmetric.f1_score
+            precision_score = classificationmetric.precision_score
+            recall_score = classificationmetric.recall_score
+
+            mlflow.log_metric("f1_score", f1_score)
+            mlflow.log_metric("precision_score", precision_score)
+            mlflow.log_metric("recall_score", recall_score)
+
+            mlflow.sklearn.log_model(bestmodel, "model")
+
 
     def train_model(self,X_train,y_train,X_test,y_test):
         try:
@@ -93,6 +111,11 @@ class ModelTrainer:
             y_test_pred=best_model.predict(X_test)
 
             classification_test_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred)
+
+
+            ##track the ml flow
+            self.track_mlflow(best_model,classification_train_metric)
+            self.track_mlflow(best_model,classification_test_metric)
 
             ##now load the prepocessor pkl taht we get from data trabnsformation
             preprocessor=load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
