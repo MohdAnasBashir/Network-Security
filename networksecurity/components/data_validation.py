@@ -86,10 +86,6 @@ class DataValidation:
         except Exception as e:
             raise NetworkSecurityException(e,sys)
 
-
-
-
-
     #now we need to initiate it 
     def initiate_data_validation(self)->DataValidationArtifact:
         try:

@@ -5,6 +5,8 @@ import os,sys
 import numpy as np
 import dill
 import pickle
+from sklearn.model_selection import GridSearchCV
+from sklearn.metrics import r2_score,accuracy_score
 
 def read_yaml_file(file_path:str)->dict:
     try: 
@@ -28,8 +30,6 @@ def write_yaml_file(file_path:str,content:object,replace:bool=False)->None:
     except Exception as e:
         raise NetworkSecurityException(e,sys)
     
-
-
 ###function to save numpy array data to file
 def save_numpy_Array_data(file_path:str,array:np.array):
     try:
@@ -52,3 +52,70 @@ def save_object(file_path:str,obj:object)->None:
         logging.info("Exited the save objecy methods of main utils class")
     except Exception as e:
         raise NetworkSecurityException(e,sys)
+    
+
+##function to load pkl file
+def load_object(file_path:str,)->object:
+    try:
+        if not os.path.exists(file_path):
+            raise Exception(F"The file:{file_path} does not exists")
+        with open(file_path,"rb") as file_obj:
+            print(file_obj)
+            return pickle.load(file_obj)
+
+    except Exception as e:
+        raise NetworkSecurityException(e,sys)
+    
+
+##function to load that numpy array
+
+def load_numpy_array_data(file_path:str)->np.array:
+    """
+    load. numpy array data from file
+    file_path loaction of file to load
+    return : np.array data loaded
+    """
+
+    try:
+        with open(file_path,"rb") as file_obj:
+            return np.load(file_obj)
+
+
+    except Exception as e:
+        raise NetworkSecurityException(e,sys)
+    
+
+##function to evaluaste the models
+def evaluate_models(X_train, y_train, X_test, y_test, models, params):
+    try:
+        ##need to return the report in dict form
+        report = {}
+
+        for i in range(len(list(models))):
+            ##take out first model
+            model = list(models.values())[i]
+            ##take out its param s
+            para=params[list(models.keys())[i]]
+            #apply grid serach get best params
+            gs = GridSearchCV(model,para,cv=3)
+            gs.fit(X_train,y_train)
+            #use those best params onmodel param
+            model.set_params(**gs.best_params_)
+            model.fit(X_train,y_train)
+
+            #model.fit(X_train, y_train)  # Train model
+
+            y_train_pred = model.predict(X_train)
+
+            y_test_pred = model.predict(X_test)
+
+            train_model_score = accuracy_score(y_train, y_train_pred)
+
+            test_model_score = accuracy_score(y_test, y_test_pred)
+            #store the models name and their evaluastion metrics values
+            report[list(models.keys())[i]] = test_model_score
+
+        return report
+
+    except Exception as e:
+        raise NetworkSecurityException(e, sys)

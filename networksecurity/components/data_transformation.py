@@ -12,7 +12,6 @@ from networksecurity.entity.artifact_entity import DataTransformationArtifact,Da
 from networksecurity.entity.config_entity import DataTransformationConfig
 from networksecurity.utils.main_utils.utils import save_numpy_Array_data,save_object
 
-
 class DataTransformation:
     def __init__(self,data_validation_artifact:DataValidationArtifact,data_transformation_config:DataTransformationConfig):
         try:
@@ -94,7 +93,7 @@ class DataTransformation:
             ##step5 save nupmy array data
             save_numpy_Array_data(self.data_transformation_config.transformed_train_file_path,array=train_arr)
             save_numpy_Array_data(self.data_transformation_config.transformed_test_file_path,array=test_arr)
-            ##step6 save the object
+            ##step6 save the preprocessor object
             save_object(self.data_transformation_config.transformed_object_file_path,preprocessor_object)
 
             ##step7 preparing artifacts
