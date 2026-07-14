@@ -84,6 +84,9 @@ class DataTransformation:
 
             transformed_input_test_feature=preprocessor_object.transform(input_feature_test_df)
 
+            ##save it in fianml models
+            save_object("final_models/preprocessor.pkl",preprocessor)
+
             ##step4
             train_arr=np.c_[transformed_input_train_feature,np.array(target_feature_train_df)]
             test_arr=np.c_[transformed_input_test_feature,np.array(target_feature_test_df)]

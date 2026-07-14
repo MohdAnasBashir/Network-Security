@@ -36,8 +36,6 @@ class ModelTrainer:
             self.model_trainer_config=model_trainer_config
         except Exception as e:
             raise NetworkSecurityException(e,sys)
-    
-
 
     def track_mlflow(self, bestmodel, classificationmetric):
         mlflow.set_tracking_uri("sqlite:///mlflow.db")
@@ -66,28 +64,27 @@ class ModelTrainer:
                 "AdaBoost": AdaBoostClassifier(),
             }
             ##their hyper parameter tuning aklong with aparmetrs
-            params={
+            params = {
                 "Decision Tree": {
-                    'criterion':['gini', 'entropy', 'log_loss'],
-                    # 'splitter':['best','random'],
-                    # 'max_features':['sqrt','log2'],
+                    "criterion": ["gini", "entropy", "log_loss"]
                 },
+
                 "Random Forest": {
-                    "n_estimators": [64]
+                    "n_estimators": [32, 64, 128]
                 },
 
                 "Gradient Boosting": {
-                    "learning_rate": [0.1],
+                    "learning_rate": [0.05, 0.1],
                     "subsample": [0.8],
-                    "n_estimators": [64]
+                    "n_estimators": [64, 128]
                 },
 
                 "AdaBoost": {
-                    "learning_rate": [0.1],
-                    "n_estimators": [64]
+                    "learning_rate": [0.05, 0.1],
+                    "n_estimators": [32, 64]
                 },
-                "Logistic Regression":{}
-        
+
+                "Logistic Regression": {}
             }
             model_report:dict=evaluate_models(X_train=X_train,y_train=y_train,X_test=X_test,y_test=y_test,models=models,params=params)
 
@@ -129,7 +126,11 @@ class ModelTrainer:
 
             save_object(self.model_trainer_config.trained_model_file_path,obj=network_model)
 
+            ##now save thsi in final_mnodel folder too
 
+            save_object("final_models/model.pkl",best_model)
+
+            
             ##model trainer artifact creation
             model_trainer_artifact=ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,

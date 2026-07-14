@@ -6,6 +6,7 @@ from networksecurity.components.model_trainer import ModelTrainer
 from networksecurity.components.data_transformation import DataTransformation
 from networksecurity.exception.exception import NetworkSecurityException
 from networksecurity.entity.config_entity import DataIngestionConfig,TrainingPipelineConfig,DataValidationConfig,DataTransformationConfig,ModelTrainerConfig
+from networksecurity.pipeline.training_pipeline import TrainingPipeline
 if __name__=="__main__":
     try:
         trainingpipelineconfig=TrainingPipelineConfig()
